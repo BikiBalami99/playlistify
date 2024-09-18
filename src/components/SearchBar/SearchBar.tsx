@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Track } from "../../Interfaces/TrackInterface";
+import { TrackInterface } from "../../Interfaces/TrackInterface";
 
 interface SearchBarProps {
   setSearchResults: (results: any[]) => void;
-  allTracks: Track[];
+  allTracks: TrackInterface[];
 }
 
 const SearchBar = ({ setSearchResults, allTracks }: SearchBarProps) => {

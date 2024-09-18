@@ -4,18 +4,22 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Playlist from "./components/Playlist/Playlist";
 import { mockApi } from "./mockdata/mock-songs";
-import { Track } from "./Interfaces/TrackInterface";
+import { TrackInterface } from "./Interfaces/TrackInterface";
 
 function App() {
-  const [allTracks, setAllTracks] = useState<Track[]>(mockApi.tracks);
-  const [searchResults, setSearchResults] = useState<Track[]>([]);
+  const [allTracks, setAllTracks] = useState<TrackInterface[]>(mockApi.tracks);
+  const [searchResults, setSearchResults] = useState<TrackInterface[]>([]);
+  const [playlist, setPlaylist] = useState<TrackInterface[]>([]);
 
   return (
     <div className="App">
       <SearchBar setSearchResults={setSearchResults} allTracks={allTracks} />
-      <SearchResults tracks={searchResults} />
-      <Playlist />
-      <p>{mockApi.tracks[4].name}</p>
+      <SearchResults
+        playlist={playlist}
+        setPlaylist={setPlaylist}
+        tracks={searchResults}
+      />
+      <Playlist playlist={playlist} />
     </div>
   );
 }
