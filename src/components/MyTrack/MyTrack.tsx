@@ -4,9 +4,15 @@ import { formatDuration } from "../../util/utilities";
 
 interface MyTrackInterface {
   myTrack: TrackInterface;
+  setPlaylist: React.Dispatch<React.SetStateAction<TrackInterface[]>>;
 }
 
-const MyTrack = ({ myTrack }: MyTrackInterface) => {
+const MyTrack = ({ myTrack, setPlaylist }: MyTrackInterface) => {
+  function handleRemoveMyTrack(trackName: string) {
+    setPlaylist((prev: TrackInterface[]) => {
+      return prev.filter((tracks) => !(trackName === tracks.name));
+    });
+  }
   return (
     <li key={myTrack.id}>
       <ul>
@@ -15,6 +21,7 @@ const MyTrack = ({ myTrack }: MyTrackInterface) => {
         <li>Album: {myTrack.album}</li>
         <li>Duration: {formatDuration(myTrack.duration_ms)}</li>
       </ul>
+      <button onClick={() => handleRemoveMyTrack(myTrack.name)}>Remove</button>
     </li>
   );
 };

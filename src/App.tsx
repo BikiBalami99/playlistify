@@ -19,7 +19,7 @@ function App() {
         setPlaylist={setPlaylist}
         tracks={searchResults}
       />
-      <Playlist playlist={playlist} />
+      <Playlist setPlaylist={setPlaylist} playlist={playlist} />
     </div>
   );
 }
