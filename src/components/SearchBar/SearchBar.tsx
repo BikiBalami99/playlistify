@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TrackInterface } from "../../Interfaces/TrackInterface";
 
 interface SearchBarProps {
@@ -8,37 +8,44 @@ interface SearchBarProps {
 
 const SearchBar = ({ setSearchResults, allTracks }: SearchBarProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
 
-  function handleSearchInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSearchTerm(() => e.target.value);
-  }
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
 
-  function filterTracks() {
-    if (searchTerm === "") {
+  //Search feature per keyboard input
+  useEffect(() => {
+    if (debouncedSearchTerm === "") {
       setSearchResults([]);
     } else {
-      const searchTermLC = searchTerm.toLowerCase();
+      const searchTermLC = debouncedSearchTerm.toLowerCase();
       setSearchResults(
         allTracks.filter((track) => {
           const trackNameLC = track.name.toLowerCase();
           const albumNameLC = track.album.toLowerCase();
           const artistNameLC = track.artist.toLowerCase();
-          if (trackNameLC.includes(searchTermLC)) {
-            return true;
-          } else if (artistNameLC.includes(searchTermLC)) {
-            return true;
-          } else if (albumNameLC.includes(searchTermLC)) {
-            return true;
-          }
+          return (
+            trackNameLC.includes(searchTermLC) ||
+            artistNameLC.includes(searchTermLC) ||
+            albumNameLC.includes(searchTermLC)
+          );
         })
       );
     }
-  }
+  }, [debouncedSearchTerm, allTracks, setSearchResults]);
 
-  useEffect(() => filterTracks(), [searchTerm]);
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         placeholder="Search"
@@ -50,29 +57,3 @@ const SearchBar = ({ setSearchResults, allTracks }: SearchBarProps) => {
 };
 
 export default SearchBar;
-
-
-// old handle function if you need
-
- // function handleSearchAction(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault();
-  //   if (searchTerm === "") {
-  //     setSearchResults([]);
-  //   } else {
-  //     const searchTermLC = searchTerm.toLowerCase();
-  //     setSearchResults(
-  //       allTracks.filter((track) => {
-  //         const trackNameLC = track.name.toLowerCase();
-  //         const albumNameLC = track.album.toLowerCase();
-  //         const artistNameLC = track.artist.toLowerCase();
-  //         if (trackNameLC.includes(searchTermLC)) {
-  //           return true;
-  //         } else if (artistNameLC.includes(searchTermLC)) {
-  //           return true;
-  //         } else if (albumNameLC.includes(searchTermLC)) {
-  //           return true;
-  //         }
-  //       })
-  //     );
-  //   }
-  // }
