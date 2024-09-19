@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { TrackInterface } from "../../Interfaces/TrackInterface";
+import Spotify from "../../modules/Spotify";
 
 interface SearchBarProps {
   setSearchResults: (results: any[]) => void;
-  allTracks: TrackInterface[];
 }
 
-const SearchBar = ({ setSearchResults, allTracks }: SearchBarProps) => {
+const SearchBar = ({ setSearchResults }: SearchBarProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
 
+  //Debounce Search term to reduce the number of API calls
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
@@ -19,26 +19,17 @@ const SearchBar = ({ setSearchResults, allTracks }: SearchBarProps) => {
     };
   }, [searchTerm]);
 
-  //Search feature per keyboard input
+  // Search Spotify API when the debounced term changes
   useEffect(() => {
     if (debouncedSearchTerm === "") {
       setSearchResults([]);
-    } else {
-      const searchTermLC = debouncedSearchTerm.toLowerCase();
-      setSearchResults(
-        allTracks.filter((track) => {
-          const trackNameLC = track.name.toLowerCase();
-          const albumNameLC = track.album.toLowerCase();
-          const artistNameLC = track.artist.toLowerCase();
-          return (
-            trackNameLC.includes(searchTermLC) ||
-            artistNameLC.includes(searchTermLC) ||
-            albumNameLC.includes(searchTermLC)
-          );
-        })
-      );
+      return;
     }
-  }, [debouncedSearchTerm, allTracks, setSearchResults]);
+
+    Spotify.search(debouncedSearchTerm).then((tracks) => {
+      setSearchResults(tracks);
+    });
+  }, [debouncedSearchTerm, setSearchResults]);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
