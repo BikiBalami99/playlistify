@@ -22,16 +22,20 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
         return (
           <li key={track.id}>
             <ul>
-              <li key={track.id + track.name}>Track: {track.name}</li>
-              <li key={track.id + track.artist}>Artist: {track.artist}</li>
-              <li key={track.id + track.album}>Album: {track.album}</li>
-              <li key={track.id + track.duration_ms}>
-                Duration: {formatDuration(track.duration_ms)}
-              </li>
+              {tracks.map((track) => (
+                <li key={track.id}>
+                  <ul>
+                    <li>Track: {track.name}</li>
+                    <li>Artist: {track.artist}</li>
+                    <li>Album: {track.album}</li>
+                    <li>Duration: {formatDuration(track.duration_ms)}</li>
+                  </ul>
+                  <button onClick={() => handleAdditionToPlaylist(track)}>
+                    Add to playlist
+                  </button>
+                </li>
+              ))}
             </ul>
-            <button onClick={() => handleAdditionToPlaylist(track)}>
-              Add to playlist
-            </button>
           </li>
         );
       })}

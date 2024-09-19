@@ -4,7 +4,7 @@ let accessToken;
 
 const Spotify = {
   getAccessToken() {
-    //Checking if access token is already stored in local storage
+    // Checking if access token is already stored in local storage
     if (accessToken) {
       return accessToken;
     }
@@ -17,13 +17,13 @@ const Spotify = {
       accessToken = tokenMatch[1];
       const expiresIn = Number(expiresInMatch[1]);
 
-      //Clear the token after it expires
+      // Clear the token after it expires
       window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
       window.history.pushState("Access Token", null, "/");
 
       return accessToken;
     } else {
-      //Redirect to Spotify for authorization if no token is present
+      // Redirect to Spotify for authorization if no token is present
       const scope = "playlist-modify-public playlist-modify-private";
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(
         scope
@@ -31,6 +31,44 @@ const Spotify = {
 
       window.location = accessUrl;
     }
+  },
+
+  createPlaylist(name) {
+    const accessToken = Spotify.getAccessToken();
+    return fetch("https://api.spotify.com/v1/me/playlists", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        description: "A playlist created from Jammming app",
+        public: true, // or false for a private playlist
+      }),
+    })
+      .then((response) => response.json())
+      .then((jsonResponse) => jsonResponse.id); // Return the new playlist ID
+  },
+
+  addTracksToPlaylist(playlistId, trackUris) {
+    const accessToken = Spotify.getAccessToken();
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uris: trackUris,
+      }),
+    });
+  },
+
+  savePlaylist(name, trackUris) {
+    return Spotify.createPlaylist(name).then((playlistId) => {
+      return Spotify.addTracksToPlaylist(playlistId, trackUris);
+    });
   },
 
   search(term) {
