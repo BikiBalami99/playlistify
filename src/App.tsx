@@ -10,6 +10,7 @@ function App() {
   const [allTracks, setAllTracks] = useState<TrackInterface[]>(mockApi.tracks);
   const [searchResults, setSearchResults] = useState<TrackInterface[]>([]);
   const [playlist, setPlaylist] = useState<TrackInterface[]>([]);
+  const [savedPlaylistUri, setSavedPlaylistUri] = useState<string[]>([]);
 
   return (
     <div className="App">
@@ -19,7 +20,18 @@ function App() {
         setPlaylist={setPlaylist}
         tracks={searchResults}
       />
-      <Playlist setPlaylist={setPlaylist} playlist={playlist} />
+      <Playlist
+        setSavedPlaylistUri={setSavedPlaylistUri}
+        savedPlaylistUri={savedPlaylistUri}
+        setPlaylist={setPlaylist}
+        playlist={playlist}
+      />
+      <div>
+        <h2>Saved Playlist</h2>
+        {savedPlaylistUri.map((uri, index) => (
+          <p key={index}>{uri}</p> // Add a key here
+        ))}
+      </div>
     </div>
   );
 }

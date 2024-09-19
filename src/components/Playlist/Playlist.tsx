@@ -5,27 +5,44 @@ import MyTrack from "../MyTrack/MyTrack";
 interface PlaylistProp {
   playlist: TrackInterface[];
   setPlaylist: React.Dispatch<React.SetStateAction<TrackInterface[]>>;
+  savedPlaylistUri: string[];
+  setSavedPlaylistUri: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Playlist = ({ playlist, setPlaylist }: PlaylistProp) => {
+const Playlist = ({
+  playlist,
+  setPlaylist,
+  savedPlaylistUri,
+  setSavedPlaylistUri,
+}: PlaylistProp) => {
   const [playlistName, setPlaylistName] = React.useState("My Playlist");
 
-  function handlePlaylistNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setPlaylistName(e.target.value);
+  function handleSavePlaylist() {
+    if (playlist.length !== 0) {
+      playlist.forEach((track) => {
+        console.log(track.uri);
+        setSavedPlaylistUri((prev: string[]) => [...prev, track.uri]);
+      });
+      setPlaylist([]);
+      setPlaylistName("My Playlist");
+    }
   }
 
   return (
     <div>
       <input
-        onChange={handlePlaylistNameChange}
+        onChange={(e) => setPlaylistName(e.target.value)}
         value={playlistName}
         type="text"
       />
       <ul>
         {playlist.map((track) => {
-          return <MyTrack setPlaylist={setPlaylist} myTrack={track} />;
+          return (
+            <MyTrack key={track.id} setPlaylist={setPlaylist} myTrack={track} />
+          );
         })}
       </ul>
+      <button onClick={handleSavePlaylist}>Save Playlist</button>
     </div>
   );
 };
