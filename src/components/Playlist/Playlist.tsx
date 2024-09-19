@@ -8,9 +8,19 @@ interface PlaylistProp {
 }
 
 const Playlist = ({ playlist, setPlaylist }: PlaylistProp) => {
+  const [playlistName, setPlaylistName] = React.useState("My Playlist");
+
+  function handlePlaylistNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setPlaylistName(e.target.value);
+  }
+
   return (
     <div>
-      <h2>Your Playlist</h2>
+      <input
+        onChange={handlePlaylistNameChange}
+        value={playlistName}
+        type="text"
+      />
       <ul>
         {playlist.map((track) => {
           return <MyTrack setPlaylist={setPlaylist} myTrack={track} />;
