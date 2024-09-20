@@ -1,6 +1,7 @@
 import React from "react";
 import { TrackInterface } from "../../Interfaces/TrackInterface";
 import { formatDuration } from "../../util/utilities";
+import styles from "./SearchResults.module.css";
 
 interface SearchBarProps {
   tracks: TrackInterface[];
@@ -17,28 +18,21 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
   }
 
   return (
-    <ul>
-      {tracks.map((track) => {
-        return (
-          <li key={track.id}>
-            <ul>
-              {tracks.map((track) => (
-                <li key={track.id}>
-                  <ul>
-                    <li>Track: {track.name}</li>
-                    <li>Artist: {track.artist}</li>
-                    <li>Album: {track.album}</li>
-                    <li>Duration: {formatDuration(track.duration_ms)}</li>
-                  </ul>
-                  <button onClick={() => handleAdditionToPlaylist(track)}>
-                    Add to playlist
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </li>
-        );
-      })}
+    <ul className={styles.searchResults}>
+      {tracks.map((track) => (
+        <li key={track.id} className={styles.card}>
+          <ul>
+            <li className={styles.albumArt}>
+              <img src="" alt="" />
+            </li>
+            <li className={styles.trackName}>{track.name}</li>
+            <li className={styles.artist}>Artist: {track.artist}</li>
+          </ul>
+          <button onClick={() => handleAdditionToPlaylist(track)}>
+            Add to playlist
+          </button>
+        </li>
+      ))}
     </ul>
   );
 };

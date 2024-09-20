@@ -1,6 +1,7 @@
 import React from "react";
 import { TrackInterface } from "../../Interfaces/TrackInterface";
 import MyTrack from "../MyTrack/MyTrack";
+import Spotify from "../../modules/Spotify";
 
 interface PlaylistProp {
   playlist: TrackInterface[];
@@ -19,12 +20,19 @@ const Playlist = ({
 
   function handleSavePlaylist() {
     if (playlist.length !== 0) {
-      playlist.forEach((track) => {
-        console.log(track.uri);
-        setSavedPlaylistUri((prev: string[]) => [...prev, track.uri]);
-      });
-      setPlaylist([]);
-      setPlaylistName("My Playlist");
+      const trackUris = playlist.map((track) => track.uri);
+      Spotify.savePlaylist(playlistName, trackUris)
+        .then(() => {
+          // Save track URIs to state
+          setSavedPlaylistUri(trackUris);
+
+          // Clear playlist and reset playlist name
+          setPlaylist([]);
+          setPlaylistName("My Playlist");
+        })
+        .catch((error) => {
+          console.error("Error saving playlist:", error);
+        });
     }
   }
 
@@ -36,11 +44,9 @@ const Playlist = ({
         type="text"
       />
       <ul>
-        {playlist.map((track) => {
-          return (
-            <MyTrack key={track.id} setPlaylist={setPlaylist} myTrack={track} />
-          );
-        })}
+        {playlist.map((track) => (
+          <MyTrack key={track.id} setPlaylist={setPlaylist} myTrack={track} />
+        ))}
       </ul>
       <button onClick={handleSavePlaylist}>Save Playlist</button>
     </div>

@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url("/public/assets/green-water-waves-2-blurred.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.main {
+  padding: 32px 64px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  height: 100svh;
+}
+
+.searchAndResults {
+  height: 100;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  padding: 12px;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 16px;
+  background: linear-gradient(
+    128deg,
+    rgba(255, 255, 255, 0.05) 43.88%,
+    rgba(255, 255, 255, 0.1) 56.12%
+  );
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.05) inset,
+    0px 0px 8px 4px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(50px);
+}
+
+.playlist {
+  width: 40%;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  border-radius: 16px;
+  background: linear-gradient(
+    128deg,
+    rgba(255, 255, 255, 0.05) 43.88%,
+    rgba(255, 255, 255, 0.1) 56.12%
+  );
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.05) inset,
+    0px 0px 8px 4px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(50px);
+}

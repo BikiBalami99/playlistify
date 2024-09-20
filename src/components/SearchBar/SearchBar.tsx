@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Spotify from "../../modules/Spotify";
+import styles from "./SearchBar.module.css";
 
 interface SearchBarProps {
   setSearchResults: (results: any[]) => void;
@@ -36,7 +37,7 @@ const SearchBar = ({ setSearchResults }: SearchBarProps) => {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         placeholder="Search"
