@@ -1,6 +1,7 @@
 import React from "react";
 import { TrackInterface } from "../../Interfaces/TrackInterface";
 import { formatDuration } from "../../util/utilities";
+import styles from "./MyTrack.module.css";
 
 interface MyTrackInterface {
   myTrack: TrackInterface;
@@ -14,14 +15,15 @@ const MyTrack = ({ myTrack, setPlaylist }: MyTrackInterface) => {
     });
   }
   return (
-    <li key={myTrack.id}>
-      <ul>
-        <li>Track: {myTrack.name}</li>
-        <li>Artist: {myTrack.artist}</li>
-        <li>Album: {myTrack.album}</li>
-        <li>Duration: {formatDuration(myTrack.duration_ms)}</li>
-      </ul>
-      <button onClick={() => handleRemoveMyTrack(myTrack.name)}>Remove</button>
+    <li className={styles.track} key={myTrack.id}>
+      <img className={styles.albumArt} src="" alt="" />
+      <div className={styles.trackHeader}>
+        <h4>{myTrack.name}</h4>
+        <p>{myTrack.artist}</p>
+      </div>
+      <p className={styles.album}>{myTrack.album}</p>
+      <p className={styles.duration}> {formatDuration(myTrack.duration_ms)}</p>
+      <button onClick={() => handleRemoveMyTrack(myTrack.name)}>del</button>
     </li>
   );
 };
