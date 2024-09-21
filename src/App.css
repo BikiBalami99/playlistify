@@ -13,19 +13,25 @@ body {
   height: 100svh;
 }
 
-.main {
-  padding: 32px 64px;
+header {
+  height: 8svh;
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  height: 80svh;
+  flex-direction: column;
+}
+
+.main {
+  height: 92svh;
+  padding: 32px 64px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto;
+  gap: 1rem;
 }
 
 .searchAndResults {
-  height: 100;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  width: 60%;
   border-radius: 1rem;
   overflow: hidden;
 
@@ -45,7 +51,6 @@ body {
 }
 
 .playlist {
-  width: 40%;
   border-radius: 1rem;
   overflow: hidden;
   display: flex;
@@ -63,4 +68,10 @@ body {
   box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.05) inset,
     0px 0px 8px 4px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(50px);
+}
+
+@media only screen and (max-width: 1045px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
 }

@@ -21,7 +21,6 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
     <ul className={styles.searchResults}>
       {tracks.map((track) => (
         <li key={track.id} className={styles.card}>
-          
           {/* The button surrounds the whole content of the card */}
           <button
             className={styles.addButton}
@@ -32,7 +31,7 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
                 <img src={track.albumArt} alt="Album Art" />
               </li>
               <li className={styles.trackName}>{track.name}</li>
-              <li className={styles.artist}>Artist: {track.artist}</li>
+              <li className={styles.artist}>{track.artist}</li>
             </ul>
           </button>
         </li>
