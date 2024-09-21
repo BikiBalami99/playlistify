@@ -25,18 +25,39 @@
 }
 
 .card {
-  display: flex;
   height: 224px;
   width: 177px;
   padding: 8px;
-  flex-direction: column;
-  justify-content: c;
-  align-items: center;
-  gap: 4px;
   list-style-type: none;
 
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.5);
+}
+.addButton {
+  display: flex;
+  background: none;
+  border: none;
+  height: 100%;
+  text-align: left;
+}
+
+.addButton:hover {
+  cursor: pointer;
+}
+
+.addButton ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addButton ul li img {
+  transition: transform 100ms ease-in-out;
+}
+
+.addButton:hover ul li img,
+.addButton:focus   ul li img {
+  transform: scale(1.1);
 }
 
 .albumArt {
@@ -47,6 +68,7 @@
   border-radius: 6px;
   background: black;
   overflow: hidden;
+  position: relative;
 }
 
 .albumArt img {

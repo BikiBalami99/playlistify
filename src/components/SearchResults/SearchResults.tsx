@@ -21,15 +21,19 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
     <ul className={styles.searchResults}>
       {tracks.map((track) => (
         <li key={track.id} className={styles.card}>
-          <ul>
-            <li className={styles.albumArt}>
-              <img src={track.albumArt} alt="Album Art" />
-            </li>
-            <li className={styles.trackName}>{track.name}</li>
-            <li className={styles.artist}>Artist: {track.artist}</li>
-          </ul>
-          <button onClick={() => handleAdditionToPlaylist(track)}>
-            Add to playlist
+          
+          {/* The button surrounds the whole content of the card */}
+          <button
+            className={styles.addButton}
+            onClick={() => handleAdditionToPlaylist(track)}
+          >
+            <ul>
+              <li className={styles.albumArt}>
+                <img src={track.albumArt} alt="Album Art" />
+              </li>
+              <li className={styles.trackName}>{track.name}</li>
+              <li className={styles.artist}>Artist: {track.artist}</li>
+            </ul>
           </button>
         </li>
       ))}
