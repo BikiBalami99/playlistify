@@ -37,7 +37,7 @@ const SearchBar = ({ setSearchResults }: SearchBarProps) => {
   };
 
   return (
-    <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
+    <div className={styles.searchBar}>
       <svg
         className={styles.searchIcon}
         xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ const SearchBar = ({ setSearchResults }: SearchBarProps) => {
           </defs>
         </svg>
       </button>
-    </form>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Playlist from "./components/Playlist/Playlist";
-import SavedPlaylistMessage from "./components/SavedPlaylistMessage/SavedPlaylistMessage";
+import Message from "./components/Message/Message";
 import { TrackInterface } from "./Interfaces/TrackInterface";
 import Spotify from "./modules/Spotify";
 import NavBar from "./components/NavBar/NavBar";
@@ -58,18 +58,13 @@ function App() {
           />
         </section>
         <section className="playlist">
+          <Message playlistName={savedPlaylistName} trackCount={trackCount} />
           <Playlist
             setSavedPlaylistUri={setSavedPlaylistUri}
             savedPlaylistUri={savedPlaylistUri}
             setPlaylist={setPlaylist}
             playlist={playlist}
           />
-          {savedPlaylistUri.length > 0 && (
-            <SavedPlaylistMessage
-              playlistName={savedPlaylistName}
-              trackCount={trackCount}
-            />
-          )}
         </section>
       </main>
     </div>

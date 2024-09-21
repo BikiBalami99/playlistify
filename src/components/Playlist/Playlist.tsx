@@ -37,40 +37,31 @@ const Playlist = ({
   }
 
   return (
-    <div>
-      <h2 className={styles.heading}>New Playlist Preview</h2>
-      <p className={styles.description}>
-        Your newly created playlist can be previewed here. After you hit the
-        Save Playlist button, the playlist will be added to your spotify account
-        automatically.
-      </p>
-      <section className={styles.myPlaylist}>
-        <section className={styles.myPlaylistTitle}>
-          <p>Playlist</p>
-          <input
-            onChange={(e) => setPlaylistName(e.target.value)}
-            value={playlistName}
-            type="text"
-          />
+    <div className={styles.playlistContainer}>
+      <section className={styles.myPlaylistTitle}>
+        <p>Playlist</p>
+        <input
+          onChange={(e) => setPlaylistName(e.target.value)}
+          value={playlistName}
+          type="text"
+        />
+      </section>
+
+      <section className={styles.myPlaylistPreview}>
+        <section className={styles.saveDetails}>
           <p>4 songs, 17 min 17 sec</p>
-        </section>
-        <section className={styles.myPlaylistPreview}>
-          <div className={styles.heading3}>
-            <h3>Title</h3>
-            <h3>Album</h3>
-            <h3>Duration</h3>
-          </div>
-          <ul className={styles.myAllTracks}>
-            {playlist.map((track) => (
-              <MyTrack
-                key={track.id}
-                setPlaylist={setPlaylist}
-                myTrack={track}
-              />
-            ))}
-          </ul>
+
           <button onClick={handleSavePlaylist}>Save Playlist</button>
         </section>
+        <section className={styles.allTracksTitles}>
+          <p>Title</p>
+          <p>Album</p>
+          <p>Duration</p>
+        </section>
+
+        {playlist.map((track) => (
+          <MyTrack key={track.id} setPlaylist={setPlaylist} myTrack={track} />
+        ))}
       </section>
     </div>
   );

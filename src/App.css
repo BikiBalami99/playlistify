@@ -23,7 +23,7 @@ header {
   height: 92svh;
   padding: 32px 64px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.8fr 1.3fr;
   grid-template-rows: auto;
   gap: 1rem;
 }
@@ -57,8 +57,7 @@ header {
   padding: 12px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
-
+  gap: 12px;
   border-radius: 16px;
   background: linear-gradient(
     128deg,
@@ -73,5 +72,37 @@ header {
 @media only screen and (max-width: 1045px) {
   .main {
     grid-template-columns: 1fr;
+  }
+}
+
+/* scrollbar css below */
+
+/* Target the entire website's scroll bar */
+html {
+  scrollbar-width: thin; /* For Firefox, sets the scrollbar width */
+  scrollbar-color: #ffffff5c #ffffff00; /* For Firefox, sets thumb and track colors */
+}
+
+/* Scrollbar styles for WebKit browsers */
+html {
+  /* Width of the scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px; /* Equivalent to thin scrollbar */
+  }
+
+  /* Background of the scrollbar track */
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  /* Scrollbar handle (thumb) */
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.36);
+    border-radius: 4px; /* Adjust the thumb's border radius */
+  }
+
+  /* On hover, make the thumb slightly more visible */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Slightly lighter on hover */
   }
 }
