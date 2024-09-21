@@ -98,6 +98,21 @@ const Spotify = {
         }));
       });
   },
+
+  getUserDetails() {
+    const accessToken = Spotify.getAccessToken();
+
+    return fetch("https://api.spotify.com/v1/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((user) => ({
+        username: user.display_name,
+        profilePicture: user.images[0]?.url, // Optional chaining in case no profile image
+      }));
+  },
 };
 
 export default Spotify;

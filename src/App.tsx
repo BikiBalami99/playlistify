@@ -5,6 +5,8 @@ import SearchResults from "./components/SearchResults/SearchResults";
 import Playlist from "./components/Playlist/Playlist";
 import SavedPlaylistMessage from "./components/SavedPlaylistMessage/SavedPlaylistMessage";
 import { TrackInterface } from "./Interfaces/TrackInterface";
+import Spotify from "./modules/Spotify";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   const [searchResults, setSearchResults] = useState<TrackInterface[]>([]);
@@ -12,19 +14,43 @@ function App() {
   const [savedPlaylistUri, setSavedPlaylistUri] = useState<string[]>([]);
   const [savedPlaylistName, setSavedPlaylistName] = useState<string>("");
   const [trackCount, setTrackCount] = useState<number>(0);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [userinfo, setUserinfo] = useState<{
+    username: any;
+    profilePicture: any;
+  }>({ username: "", profilePicture: "" });
 
   useEffect(() => {
     if (savedPlaylistUri.length > 0) {
-      // Assuming the playlist name is available from the Playlist component or elsewhere
-      setSavedPlaylistName("My Playlist"); // Replace with actual playlist name if available
+      setSavedPlaylistName("My Playlist");
       setTrackCount(savedPlaylistUri.length);
     }
   }, [savedPlaylistUri]);
 
+  useEffect(() => {
+    const token = Spotify.getAccessToken();
+    if (token) {
+      setIsSignedIn(true);
+      Spotify.getUserDetails().then((user) => {
+        setUserinfo({
+          username: user.username,
+          profilePicture: user.profilePicture,
+        });
+      });
+    }
+  }, []);
+
   return (
     <div className="App">
+      <header>
+        <NavBar
+          profilePicture={userinfo.profilePicture}
+          username={userinfo.username}
+        />
+      </header>
       <main className="main">
         <section className="searchAndResults">
+          <p>{isSignedIn === true ? "true" : "false"}</p>
           <SearchBar setSearchResults={setSearchResults} />
           <SearchResults
             playlist={playlist}

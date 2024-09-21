@@ -1,0 +1,69 @@
+.navBar {
+  display: flex;
+  padding: 12px 15px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+
+  border-radius: 16px;
+  background: linear-gradient(
+    89deg,
+    rgba(255, 255, 255, 0.05) 44.69%,
+    rgba(255, 255, 255, 0.1) 55.31%
+  );
+  box-shadow: -4px 4px 8px 0px rgba(0, 0, 0, 0.05) inset,
+    0px 0px 8px 4px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(50px);
+}
+
+.logo {
+  display: flex;
+  width: 144px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo svg {
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+}
+
+.logo span {
+  background: none;
+  color: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.userInfo {
+  height: 2.5rem;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 6px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.profilePicture {
+  height: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: 0px 0px 2px black;
+}
+
+.username {
+  color: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  overflow: hidden;
+}
