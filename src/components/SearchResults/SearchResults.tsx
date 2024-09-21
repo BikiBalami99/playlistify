@@ -23,7 +23,7 @@ const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
         <li key={track.id} className={styles.card}>
           <ul>
             <li className={styles.albumArt}>
-              <img src="" alt="" />
+              <img src={track.albumArt} alt="Album Art" />
             </li>
             <li className={styles.trackName}>{track.name}</li>
             <li className={styles.artist}>Artist: {track.artist}</li>

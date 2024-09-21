@@ -46,6 +46,12 @@
   flex-shrink: 0;
   border-radius: 6px;
   background: black;
+  overflow: hidden;
+}
+
+.albumArt img {
+  height: 100%;
+  width: 100%;
 }
 
 .trackName {

@@ -95,6 +95,7 @@ const Spotify = {
           album: track.album.name,
           uri: track.uri,
           duration_ms: track.duration_ms,
+          albumArt: track.album.images[0].url,
         }));
       });
   },

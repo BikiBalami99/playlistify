@@ -16,7 +16,7 @@ const MyTrack = ({ myTrack, setPlaylist }: MyTrackInterface) => {
   }
   return (
     <li className={styles.track} key={myTrack.id}>
-      <img className={styles.albumArt} src="" alt="" />
+      <img className={styles.albumArt} src={myTrack.albumArt} alt="" />
       <div className={styles.trackHeader}>
         <h4>{myTrack.name}</h4>
         <p>{myTrack.artist}</p>

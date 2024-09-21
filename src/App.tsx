@@ -50,7 +50,6 @@ function App() {
       </header>
       <main className="main">
         <section className="searchAndResults">
-          <p>{isSignedIn === true ? "true" : "false"}</p>
           <SearchBar setSearchResults={setSearchResults} />
           <SearchResults
             playlist={playlist}
