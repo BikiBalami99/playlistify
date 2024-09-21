@@ -25,13 +25,18 @@
 }
 
 .card {
-  height: 224px;
+  height: 220px;
   width: 177px;
   padding: 8px;
   list-style-type: none;
 
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.5);
+  transition: all 100ms ease-in-out;
+}
+
+.card:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 .addButton {
   display: flex;
@@ -52,12 +57,13 @@
 }
 
 .addButton ul li img {
-  transition: transform 100ms ease-in-out;
+  transition: transform 200ms ease-out;
+  transform: scale(1);
 }
 
 .addButton:hover ul li img,
-.addButton:focus   ul li img {
-  transform: scale(1.1);
+.addButton:focus ul li img {
+  transform: scale(1.05);
 }
 
 .albumArt {
@@ -79,7 +85,7 @@
 .trackName {
   list-style-type: none;
   display: flex;
-  height: 21px;
+
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -101,4 +107,15 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+/* making sure the title and artist done overflow to next line */
+
+.trackName,
+.artist {
+  width: 10rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Ensure the text stays within the parent's width */
 }
