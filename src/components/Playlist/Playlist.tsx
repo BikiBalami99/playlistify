@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TrackInterface } from "../../Interfaces/TrackInterface";
 import MyTrack from "../MyTrack/MyTrack";
 import Spotify from "../../modules/Spotify";
@@ -9,12 +9,20 @@ interface PlaylistProp {
   setPlaylist: React.Dispatch<React.SetStateAction<TrackInterface[]>>;
   savedPlaylistUri: string[];
   setSavedPlaylistUri: React.Dispatch<React.SetStateAction<string[]>>;
+  totalSongs: number;
+  totalTime: number;
+  setTotalSongs: React.Dispatch<React.SetStateAction<number>>;
+  setTotalTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Playlist = ({
   playlist,
   setPlaylist,
   setSavedPlaylistUri,
+  totalSongs,
+  totalTime,
+  setTotalSongs,
+  setTotalTime,
 }: PlaylistProp) => {
   const [playlistName, setPlaylistName] = React.useState("My Playlist");
 
@@ -36,6 +44,12 @@ const Playlist = ({
     }
   }
 
+  function formatTotalTime(totalInMs: number) {
+    const minutes = Math.floor(totalInMs / 60000);
+    const seconds = Math.floor(totalInMs / 1000 - minutes * 60);
+    return `${minutes} mins ${seconds} seconds`;
+  }
+
   return (
     <div className={styles.playlistContainer}>
       <section className={styles.myPlaylistTitle}>
@@ -49,9 +63,10 @@ const Playlist = ({
 
       <section className={styles.myPlaylistPreview}>
         <section className={styles.saveDetails}>
-          <p>4 songs, 17 min 17 sec</p>
-
-          <button onClick={handleSavePlaylist}>Save Playlist</button>
+          <p>
+            {totalSongs} songs, {formatTotalTime(totalTime)}
+          </p>
+          <button onClick={handleSavePlaylist}>Save to Spotify</button>
         </section>
         <section className={styles.allTracksTitles}>
           <p>Title</p>
@@ -60,7 +75,13 @@ const Playlist = ({
         </section>
 
         {playlist.map((track) => (
-          <MyTrack key={track.id} setPlaylist={setPlaylist} myTrack={track} />
+          <MyTrack
+            setTotalSongs={setTotalSongs}
+            setTotalTime={setTotalTime}
+            key={track.id}
+            setPlaylist={setPlaylist}
+            myTrack={track}
+          />
         ))}
       </section>
     </div>

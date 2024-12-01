@@ -20,26 +20,26 @@ export default function NavBar({ profilePicture, username }: NavBarProps) {
           <path
             d="M26.5 22.443H8.5"
             stroke="white"
-            stroke-width="2"
-            stroke-miterlimit="10"
+            strokeWidth="2"
+            strokeMiterlimit="10"
           />
           <path
             d="M26.5 18.443H8.5"
             stroke="white"
-            stroke-width="2"
-            stroke-miterlimit="10"
+            strokeWidth="2"
+            strokeMiterlimit="10"
           />
           <path
             d="M26.5 14.443H8.5"
             stroke="white"
-            stroke-width="2"
-            stroke-miterlimit="10"
+            strokeWidth="2"
+            strokeMiterlimit="10"
           />
           <path
             d="M26.5 10.443H12.5"
             stroke="white"
-            stroke-width="2"
-            stroke-miterlimit="10"
+            strokeWidth="2"
+            strokeMiterlimit="10"
           />
           <path
             d="M9.97605 10.4435L6 12.8103V8.07668L9.97605 10.4435Z"
@@ -49,8 +49,8 @@ export default function NavBar({ profilePicture, username }: NavBarProps) {
           <path
             d="M2.5 19.443V12.443C2.5 11.9126 2.71071 11.4039 3.08579 11.0288C3.46086 10.6537 3.96957 10.443 4.5 10.443H7.5"
             stroke="white"
-            stroke-width="2"
-            stroke-miterlimit="10"
+            strokeWidth="2"
+            strokeMiterlimit="10"
           />
         </svg>
         <span>Playlistify</span>

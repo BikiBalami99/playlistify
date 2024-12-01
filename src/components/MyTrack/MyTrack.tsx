@@ -6,10 +6,20 @@ import styles from "./MyTrack.module.css";
 interface MyTrackInterface {
   myTrack: TrackInterface;
   setPlaylist: React.Dispatch<React.SetStateAction<TrackInterface[]>>;
+  setTotalSongs: React.Dispatch<React.SetStateAction<number>>;
+  setTotalTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MyTrack = ({ myTrack, setPlaylist }: MyTrackInterface) => {
+const MyTrack = ({
+  myTrack,
+  setPlaylist,
+  setTotalSongs,
+  setTotalTime,
+}: MyTrackInterface) => {
+  // handling deletion, as well as minusing total time and total songs the info-bar above it
   function handleRemoveMyTrack(trackName: string) {
+    setTotalSongs((prev) => prev - 1);
+    setTotalTime((prev) => prev - myTrack.duration_ms);
     setPlaylist((prev: TrackInterface[]) => {
       return prev.filter((tracks) => !(trackName === tracks.name));
     });

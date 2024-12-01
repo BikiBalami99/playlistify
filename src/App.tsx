@@ -15,6 +15,9 @@ function App() {
   const [savedPlaylistName, setSavedPlaylistName] = useState<string>("");
   const [trackCount, setTrackCount] = useState<number>(0);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [totalSongs, setTotalSongs] = useState(0);
+  const [totalTime, setTotalTime] = useState(0);
+
   const [userinfo, setUserinfo] = useState<{
     username: any;
     profilePicture: any;
@@ -55,6 +58,8 @@ function App() {
             playlist={playlist}
             setPlaylist={setPlaylist}
             tracks={searchResults}
+            setTotalSongs={setTotalSongs}
+            setTotalTime={setTotalTime}
           />
         </section>
         <section className="playlist">
@@ -64,6 +69,10 @@ function App() {
             savedPlaylistUri={savedPlaylistUri}
             setPlaylist={setPlaylist}
             playlist={playlist}
+            totalSongs={totalSongs}
+            totalTime={totalTime}
+            setTotalSongs={setTotalSongs}
+            setTotalTime={setTotalTime}
           />
         </section>
       </main>

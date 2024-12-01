@@ -59,3 +59,9 @@
 .deleteButton:hover {
   opacity: 1;
 }
+
+@media only screen and (max-width: 500px) {
+  .searchBar {
+    min-width: 250px;
+  }
+}

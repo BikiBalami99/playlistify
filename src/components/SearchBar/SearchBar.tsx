@@ -70,31 +70,31 @@ const SearchBar = ({ setSearchResults }: SearchBarProps) => {
             cy="16"
             r="16"
             fill="url(#paint0_linear_32_864)"
-            fill-opacity="0.9"
+            fillOpacity="0.9"
           />
           <path
             d="M10 22.7279L22.7279 9.99998"
             stroke="#363636"
-            stroke-width="3"
-            stroke-linecap="round"
+            strokeWidth="3"
+            strokeLinecap="round"
           />
           <path
             d="M10 10L22.7279 22.7279"
             stroke="#363636"
-            stroke-width="3"
-            stroke-linecap="round"
+            strokeWidth="3"
+            strokeLinecap="round"
           />
           <defs>
             <linearGradient
               id="paint0_linear_32_864"
               x1="27.0216"
-              y1="1.10736e-06"
+              y1="0"
               x2="4.97839"
               y2="32"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="white" />
-              <stop offset="1" stop-color="white" stop-opacity="0.5" />
+              <stop stopColor="white" />
+              <stop offset="1" stopColor="white" stopOpacity="0.5" />
             </linearGradient>
           </defs>
         </svg>

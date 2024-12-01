@@ -114,3 +114,6 @@
   text-overflow: ellipsis;
   max-width: 100%; /* Ensure the text stays within the parent's width */
 }
+
+@media only screen and (max-width: 500px) {
+}

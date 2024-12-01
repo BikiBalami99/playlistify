@@ -7,13 +7,23 @@ interface SearchBarProps {
   tracks: TrackInterface[];
   setPlaylist: React.Dispatch<React.SetStateAction<TrackInterface[]>>;
   playlist: TrackInterface[];
+  setTotalSongs: React.Dispatch<React.SetStateAction<number>>;
+  setTotalTime: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SearchResults = ({ tracks, playlist, setPlaylist }: SearchBarProps) => {
+const SearchResults = ({
+  tracks,
+  playlist,
+  setPlaylist,
+  setTotalSongs,
+  setTotalTime,
+}: SearchBarProps) => {
   //Adding current song to playlist
   function handleAdditionToPlaylist(track: TrackInterface) {
     if (!playlist.includes(track)) {
       setPlaylist((prev: TrackInterface[]) => [...prev, track]);
+      setTotalSongs((prev) => prev + 1);
+      setTotalTime((prev) => prev + track.duration_ms);
     }
   }
 
